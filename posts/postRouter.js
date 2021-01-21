@@ -1,16 +1,16 @@
 const express = require('express');
-import { post } from '../server';
-import postDb from './postDb';
+const { post } = require('../server');
+const postDb = require('./postDb');
 
 const router = express.Router();
 
 
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   // do your magic!
-  const posts = postDb.get()
-  
-  res.status(200).json({posts: posts})
+
+
+  next();
 });
 
 router.get('/:id', (req, res) => {
@@ -19,6 +19,12 @@ router.get('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // do your magic!
+  const id = req.params.id;
+
+  res.status(200).json({
+    url: `/${id}`,
+    operation: `DELETE user with id ${id}`
+  })
 });
 
 router.put('/:id', (req, res) => {
