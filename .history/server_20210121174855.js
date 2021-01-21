@@ -6,7 +6,7 @@ const userRouter = require('./users/userRouter');
 
 server.use(logger, express.json())
 server.use('/posts', postRouter)
-server.use('/users', userRouter)  
+server.use('/users', userRouter)
 
 
 server.get('/', (req, res) => {

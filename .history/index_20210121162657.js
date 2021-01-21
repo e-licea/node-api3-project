@@ -1,10 +1,7 @@
 // code away!
 const server = require('./server');
 
-const PORT = process.env.PORT || 2000 
-
-
-
+const PORT = 5000 
 
 
 

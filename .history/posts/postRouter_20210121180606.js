@@ -45,7 +45,7 @@ return (req, res, next)=>{
       req.post = post
       next();
     }else{
-      res.status(400).json({message: `$ERR: ${req.params.id} post id was not found`})
+      res.status(400).json({message: `$ERR: ${post} post id was not found`})
     }
   })
   .catch(next)

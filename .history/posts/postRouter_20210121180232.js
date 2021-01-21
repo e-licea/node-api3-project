@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
   
 });
 
-router.get('/:id', validatePostId(), async (req, res) => {
+router.get('/:id', async (req, res) => {
   // do your magic!
   res.status(200).json({ data: req.post })
 });
@@ -45,7 +45,7 @@ return (req, res, next)=>{
       req.post = post
       next();
     }else{
-      res.status(400).json({message: `$ERR: ${req.params.id} post id was not found`})
+      res.status(400).json({message: 'invalid user id'})
     }
   })
   .catch(next)

@@ -15,9 +15,8 @@ router.get('/', async (req, res) => {
   
 });
 
-router.get('/:id', validatePostId(), async (req, res) => {
+router.get('/:id', (req, res) => {
   // do your magic!
-  res.status(200).json({ data: req.post })
 });
 
 router.delete('/:id', (req, res) => {
@@ -36,21 +35,8 @@ router.put('/:id', (req, res) => {
 
 // custom middleware
 
-function validatePostId() {
+function validatePostId(req, res, next) {
   // do your magic!
-return (req, res, next)=>{
-  postDb.getById(req.params.id)
-  .then( post =>{
-    if(post) {
-      req.post = post
-      next();
-    }else{
-      res.status(400).json({message: `$ERR: ${req.params.id} post id was not found`})
-    }
-  })
-  .catch(next)
-}
-
 }
 
 module.exports = router;

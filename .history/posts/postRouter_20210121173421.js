@@ -15,9 +15,12 @@ router.get('/', async (req, res) => {
   
 });
 
-router.get('/:id', validatePostId(), async (req, res) => {
+router.get('/:id', async (req, res) => {
   // do your magic!
-  res.status(200).json({ data: req.post })
+  const post = await postDb.getById(req.params.id)
+  if (post) {
+    res.status(200).json({post: post})
+  }
 });
 
 router.delete('/:id', (req, res) => {
@@ -38,18 +41,7 @@ router.put('/:id', (req, res) => {
 
 function validatePostId() {
   // do your magic!
-return (req, res, next)=>{
-  postDb.getById(req.params.id)
-  .then( post =>{
-    if(post) {
-      req.post = post
-      next();
-    }else{
-      res.status(400).json({message: `$ERR: ${req.params.id} post id was not found`})
-    }
-  })
-  .catch(next)
-}
+
 
 }
 
