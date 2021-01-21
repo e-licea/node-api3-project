@@ -23,7 +23,7 @@ router.get('/:id', validatePostId(), async (req, res) => {
 router.delete('/:id', validatePostId(),   async(req, res) => {
   // do your magic!
 
-await postDb.remove(req.post.id)
+  await postDb.remove(req.post.id)
   
 res.status(200).json({
     url: `/${req.post.id}`,
@@ -31,11 +31,8 @@ res.status(200).json({
   })
 });
 
-router.put('/:id',validatePostId(), async (req, res) => {
+router.put('/:id', (req, res) => {
   // do your magic!
-
-
-
 });
 
 // custom middleware

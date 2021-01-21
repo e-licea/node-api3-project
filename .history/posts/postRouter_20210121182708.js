@@ -22,20 +22,24 @@ router.get('/:id', validatePostId(), async (req, res) => {
 
 router.delete('/:id', validatePostId(),   async(req, res) => {
   // do your magic!
-
-await postDb.remove(req.post.id)
+  const {id} = await req.post
+  .then(post =>{
+    if (post) {
+      postDb.remove(id);
+    }else{
+      res.status(400).json({err: `ERR: Could not delete post`})
+    }
+  })
+  .catch(next)
   
-res.status(200).json({
-    url: `/${req.post.id}`,
-    operation: `DELETE post with id ${req.post.id}`
+  res.status(200).json({
+    url: `/${id}`,
+    operation: `DELETE post with id ${id}`
   })
 });
 
-router.put('/:id',validatePostId(), async (req, res) => {
+router.put('/:id', (req, res) => {
   // do your magic!
-
-
-
 });
 
 // custom middleware

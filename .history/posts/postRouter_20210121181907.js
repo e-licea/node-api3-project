@@ -20,22 +20,19 @@ router.get('/:id', validatePostId(), async (req, res) => {
   res.status(200).json({ data: req.post })
 });
 
-router.delete('/:id', validatePostId(),   async(req, res) => {
+router.delete('/:id', validatePostId(),   (req, res) => {
   // do your magic!
+  const id = req.post.user_id
+  console.log(id)
 
-await postDb.remove(req.post.id)
-  
-res.status(200).json({
-    url: `/${req.post.id}`,
-    operation: `DELETE post with id ${req.post.id}`
+  res.status(200).json({
+    url: `/${id}`,
+    operation: `DELETE user with id ${id}`
   })
 });
 
-router.put('/:id',validatePostId(), async (req, res) => {
+router.put('/:id', (req, res) => {
   // do your magic!
-
-
-
 });
 
 // custom middleware
