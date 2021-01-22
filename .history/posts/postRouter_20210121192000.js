@@ -39,7 +39,7 @@ const post = req.post.id
 if( text && post) {
   postDb.update(post, text)
   .then( updated =>{
-  res.status(200).json({text: updated})
+  res.status(200).json({text: text, id: post})
 
   }).catch(next)  
 }else{

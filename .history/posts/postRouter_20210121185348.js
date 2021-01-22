@@ -31,20 +31,16 @@ res.status(200).json({
   })
 });
 
-router.put('/:id', validatePostId(), (req, res, next) => {
+router.put('/:id', validatePostId(), async (req, res) => {
   // do your magic!
-const text = req.body
-const post = req.post.id
+const newText = await req.body.newText
+const post = await req.post.id
 
-if( text && post) {
-  postDb.update(post, text)
-  .then( updated =>{
-  res.status(200).json({text: updated})
+res.status(200).json({
+  message: `Text for post id ${id} has been changed`,
+  text: `${newText}`
+})
 
-  }).catch(next)  
-}else{
-  res.status(400).json({err: `ERR: Something went wrong.`});
-}
 
 });
 

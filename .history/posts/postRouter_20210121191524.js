@@ -33,18 +33,16 @@ res.status(200).json({
 
 router.put('/:id', validatePostId(), (req, res, next) => {
   // do your magic!
-const text = req.body
+const text = req.body.newText
 const post = req.post.id
 
 if( text && post) {
   postDb.update(post, text)
-  .then( updated =>{
-  res.status(200).json({text: updated})
-
-  }).catch(next)  
+  next();
 }else{
   res.status(400).json({err: `ERR: Something went wrong.`});
 }
+res.status(200).json({text: text, id: post})
 
 });
 
