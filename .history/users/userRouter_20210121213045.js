@@ -18,9 +18,9 @@ router.post('/', async (req, res, next ) => {
 
 router.post('/:id/posts', async (req, res) => {
   // do your magic!
- await userDb.insert(req.body)
- .then( res =>{res.status(200).json({data:req.body}) })
- .catch(rej =>{res.status(400).json({err: `could not add new post.`})})
+ const postUser = await userDb.insert(req.body)
+
+ res.status(200).json({data:req.body})
 });
 
 router.get('/', async(req, res) => {

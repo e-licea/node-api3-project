@@ -12,15 +12,12 @@ router.post('/', async (req, res, next ) => {
       
     } 
   }catch (err){
-    res.status(400).json({err: `Could not add new user. Name could already be taken.`})
+    res.status(400).json({ERR: `Could not add new user`})
   }
 });
 
-router.post('/:id/posts', async (req, res) => {
+router.post('/:id/posts', (req, res) => {
   // do your magic!
- await userDb.insert(req.body)
- .then( res =>{res.status(200).json({data:req.body}) })
- .catch(rej =>{res.status(400).json({err: `could not add new post.`})})
 });
 
 router.get('/', async(req, res) => {
