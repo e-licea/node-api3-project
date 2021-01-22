@@ -34,7 +34,7 @@ router.get('/:id/posts', validateUserId(), async (req, res) => {
 
 });
 
-router.delete('/:id',validateUserId(), async (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
   // do your magic!tch(next)
   await userDb.remove(req.user.id)
   .then(resolve=>{

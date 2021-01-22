@@ -34,15 +34,18 @@ router.get('/:id/posts', validateUserId(), async (req, res) => {
 
 });
 
-router.delete('/:id',validateUserId(), async (req, res, next) => {
-  // do your magic!tch(next)
-  await userDb.remove(req.user.id)
-  .then(resolve=>{
-    res.status(200).json({message: `User ${req.user.id} has been deleted`})
-  })
-  .catch(reject=>{
-    res.status(400).json({message: `User ${req.user.id} could not be deleted`})
-  })
+router.delete('/:id', async (req, res, next) => {
+  // do your magic!
+  const { id } = req.user
+  const deletedUser = await userDb.remove(id)
+  .then(deleted =>{
+    if (deleted){
+      res.status(200).json({message: `user ${req.user.name} has been deleted.`})
+    }else{
+      res.status(400).json({err: `ERR: User ${req.user.name} could not be deleted.`})
+    }
+  }).catch(next)
+
 });
 
 router.put('/:id', (req, res) => {

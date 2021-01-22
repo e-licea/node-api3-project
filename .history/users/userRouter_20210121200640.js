@@ -23,7 +23,9 @@ router.get('/', async(req, res) => {
 
 router.get('/:id', validateUserId(), (req, res) => {
   // do your magic!
-  res.status(200).json({user: req.user})
+  const user = await userDb.getById(req.user.id)
+
+  res.status(200).json({message: `Hello from the ${req.url}`})
 });
 
 router.get('/:id/posts', validateUserId(), async (req, res) => {
@@ -34,15 +36,8 @@ router.get('/:id/posts', validateUserId(), async (req, res) => {
 
 });
 
-router.delete('/:id',validateUserId(), async (req, res, next) => {
-  // do your magic!tch(next)
-  await userDb.remove(req.user.id)
-  .then(resolve=>{
-    res.status(200).json({message: `User ${req.user.id} has been deleted`})
-  })
-  .catch(reject=>{
-    res.status(400).json({message: `User ${req.user.id} could not be deleted`})
-  })
+router.delete('/:id', (req, res) => {
+  // do your magic!
 });
 
 router.put('/:id', (req, res) => {
